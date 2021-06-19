@@ -14,14 +14,26 @@ import com.br.mysubscribers.R
 import com.br.mysubscribers.data.db.AppDatabase
 import com.br.mysubscribers.data.db.dao.SubscriberDao
 import com.br.mysubscribers.data.db.entity.SubscriberEntity
+import com.br.mysubscribers.databinding.SubscriberFragmentBinding
 import com.br.mysubscribers.extension.clearError
 import com.br.mysubscribers.extension.hideKeyboard
 import com.br.mysubscribers.repository.DatabaseDataSource
 import com.br.mysubscribers.repository.SubscriberRepository
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.subscriber_fragment.*
 
-class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
+class SubscriberFragment : Fragment() {
+
+    private lateinit var binding: SubscriberFragmentBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        //return inflater.inflate(R.layout.subscriber_fragment, container, false)
+        binding = SubscriberFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     private val viewModel: SubscriberViewModel by viewModels {
         object : ViewModelProvider.Factory {
@@ -49,9 +61,9 @@ class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
 
     private fun configFields() {
         args.subscriber?.let { subscriber ->
-            btn_register.text = getString(R.string.subscriber_btn_update)
-            input_name.setText(subscriber.name)
-            input_email.setText(subscriber.email)
+            binding.btnRegister.text = getString(R.string.subscriber_btn_update)
+            binding.inputName.setText(subscriber.name)
+            binding.inputEmail.setText(subscriber.email)
         }
     }
 
@@ -81,34 +93,34 @@ class SubscriberFragment : Fragment(R.layout.subscriber_fragment) {
     }
 
     private fun setListeners() {
-        btn_register.setOnClickListener {
-            val name = input_name.text.toString()
-            val email = input_email.text.toString()
+        binding.btnRegister.setOnClickListener {
+            val name = binding.inputName.text.toString()
+            val email = binding.inputEmail.text.toString()
 
             if (name.isNotEmpty()) {
                 if (email.isNotEmpty()) {
 
-                    subscriber_progressbar.visibility = View.VISIBLE
+                    binding.subscriberProgressbar.visibility = View.VISIBLE
 
                     viewModel.addOrUpdateSubscriber(name, email, args.subscriber?.id ?: 0)
 
                 } else {
-                    input_layout_email.error = "Informe um email."
+                    binding.inputLayoutEmail.error = "Informe um email."
                 }
             } else {
-                input_layout_name.error = "Informe um nome."
+                binding.inputLayoutName.error = "Informe um nome."
             }
 
         }
     }
 
     private fun clearError() {
-        input_name.addTextChangedListener {
-            input_layout_name.clearError()
+        binding.inputName.addTextChangedListener {
+            binding.inputLayoutName.clearError()
         }
 
-        input_email.addTextChangedListener {
-            input_layout_email.clearError()
+        binding.inputEmail.addTextChangedListener {
+            binding.inputLayoutEmail.clearError()
         }
     }
 

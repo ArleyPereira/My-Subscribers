@@ -1,8 +1,9 @@
 package com.br.mysubscribers.ui.subscriberlist
 
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -13,12 +14,23 @@ import com.br.mysubscribers.R
 import com.br.mysubscribers.data.db.AppDatabase
 import com.br.mysubscribers.data.db.dao.SubscriberDao
 import com.br.mysubscribers.data.db.entity.SubscriberEntity
+import com.br.mysubscribers.databinding.SubscriberListFragmentBinding
 import com.br.mysubscribers.extension.navigateWithAnimations
 import com.br.mysubscribers.repository.DatabaseDataSource
 import com.br.mysubscribers.repository.SubscriberRepository
-import kotlinx.android.synthetic.main.subscriber_list_fragment.*
 
-class SubscriberListFragment : Fragment(R.layout.subscriber_list_fragment) {
+class SubscriberListFragment : Fragment() {
+
+    private lateinit var binding: SubscriberListFragmentBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = SubscriberListFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     private val viewModel: SubscriberListViewModel by viewModels {
         object : ViewModelProvider.Factory {
@@ -51,7 +63,7 @@ class SubscriberListFragment : Fragment(R.layout.subscriber_list_fragment) {
 
             subscribersIsEmpty(allSubscribers)
 
-            with(rv_subscriber) {
+            with(binding.rvSubscriber) {
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
                 adapter = subscriberListAdapter
@@ -60,7 +72,7 @@ class SubscriberListFragment : Fragment(R.layout.subscriber_list_fragment) {
     }
 
     private fun subscribersIsEmpty(subscribers: List<SubscriberEntity>) {
-        txt_subscribers_empty.text = if (subscribers.isEmpty()) {
+        binding.txtSubscribersEmpty.text = if (subscribers.isEmpty()) {
             getString(R.string.subscriber_list_empty)
         } else {
             ""
@@ -73,7 +85,7 @@ class SubscriberListFragment : Fragment(R.layout.subscriber_list_fragment) {
     }
 
     private fun configureViewListeners() {
-        fab_add.setOnClickListener {
+        binding.fabAdd.setOnClickListener {
             findNavController().navigateWithAnimations(
                 R.id.action_subscriberListFragment_to_subscriberFragment
             )

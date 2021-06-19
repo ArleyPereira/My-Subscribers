@@ -1,24 +1,22 @@
 package com.br.mysubscribers.ui.subscriberlist
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.br.mysubscribers.R
 import com.br.mysubscribers.data.db.entity.SubscriberEntity
-import kotlinx.android.synthetic.main.subscriber_item.view.*
+import com.br.mysubscribers.databinding.SubscriberItemBinding
 
 class SubscriberListAdapter(
     private val subscribers: List<SubscriberEntity>
 ) : RecyclerView.Adapter<SubscriberListAdapter.SubscriberViewHolder>() {
 
+    private lateinit var binding: SubscriberItemBinding
     var onItemClick: ((entity: SubscriberEntity) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriberViewHolder {
-        val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.subscriber_item, parent, false)
-        return SubscriberViewHolder(itemView)
+        binding = SubscriberItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SubscriberViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SubscriberViewHolder, position: Int) {
@@ -27,10 +25,11 @@ class SubscriberListAdapter(
 
     override fun getItemCount() = subscribers.count()
 
-    inner class SubscriberViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class SubscriberViewHolder(binding: SubscriberItemBinding)
+        : RecyclerView.ViewHolder(binding.root) {
 
-        private val subscriber_name: TextView = itemView.subscriber_name
-        private val subscriber_email: TextView = itemView.subscriber_email
+        private val subscriber_name: TextView = binding.subscriberName
+        private val subscriber_email: TextView = binding.subscriberEmail
 
         fun bindView(subscriber: SubscriberEntity) {
             subscriber_name.text = subscriber.name

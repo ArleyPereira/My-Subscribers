@@ -31,7 +31,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_close"
+            android:id="@+id/btnClose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -39,7 +39,7 @@
             android:text="Close"/>
 
         <Button
-            android:id="@+id/btn_confirm"
+            android:id="@+id/btnConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

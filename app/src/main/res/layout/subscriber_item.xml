@@ -17,7 +17,7 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/subscriber_name"
+            android:id="@+id/subscriberName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -27,7 +27,7 @@
             tools:text="Arley Santana" />
 
         <TextView
-            android:id="@+id/subscriber_email"
+            android:id="@+id/subscriberEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
