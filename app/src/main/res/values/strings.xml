@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">My Subscribers</string>
+
+    <!--    Subscriber Fragment-->
+    <string name="subscriber_input_hint_name">Name</string>
+    <string name="subscriber_input_hint_email">E-mail</string>
+    <string name="subscriber_btn_register">Register</string>
+    <string name="subscriber_btn_update">Update</string>
+    <string name="action_bar_title_subscriber">Add subscriber</string>
+
+    <string name="subscriber_inserted_successfully">Registro inserido com sucesso.</string>
+    <string name="subscriber_error_insert">Erro ao inserir o registro.</string>
+
+    <string name="subscriber_update_successfully">Registro atualizado com sucesso.</string>
+    <string name="subscriber_update_error">Erro ao atualizar registro.</string>
+
+    <string name="subscriber_delete_successfully">Registro removido com sucesso.</string>
+    <string name="subscriber_delete_error">Erro ao remover registro.</string>
+
+    <!--    Subscribers Fragment-->
+    <string name="action_bar_title_subscribers">Subscribers</string>
+    <string name="subscriber_list_empty">Nenhum registro adicionado.</string>
+
+</resources>
